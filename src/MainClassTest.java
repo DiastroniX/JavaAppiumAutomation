@@ -28,4 +28,19 @@ public class MainClassTest extends MainClass
             Assert.fail("Fail, Class Number <= 45");
         }
     }
+
+    @Test
+    public void testGetClassString()
+    {
+        String str1 = "hello";
+
+        if (str1.regionMatches(true, 0, getClassString(), 0,5))
+        {
+            System.out.println("Passed, text looks like: hello/Hello");
+        }
+        else
+        {
+            Assert.fail("Failed, text isn't similar: hello/Hello");
+        }
+    }
 }
