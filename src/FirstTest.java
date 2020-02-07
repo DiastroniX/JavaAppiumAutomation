@@ -210,6 +210,43 @@ public class FirstTest {
         );
     }
 
+    @Test
+    public void testFindSomeResultsWithSameWord()
+    {
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text,'Search…')]"),
+                "Test",
+                "Cannot find search input",
+                15
+        );
+
+        waitForElementPresent(
+                By.xpath("//*[@index = '0']//*[contains(@text,'Test')]"),
+                "Cannot find same text in result searching by 'Test' on line 0",
+                5
+        );
+
+
+        waitForElementPresent(
+                By.xpath("//*[@index = '1']//*[contains(@text,'Test')]"),
+                "Cannot find same text in result searching by 'Test' on line 1",
+                5
+        );
+
+
+        waitForElementPresent(
+                By.xpath("//*[@index = '2']//*[contains(@text,'Test')]"),
+                "Cannot find same text in result searching by 'Test' on line 2",
+                5
+        );
+    }
+
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds)
     {
         WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
