@@ -737,8 +737,39 @@ public class FirstTest {
                 5
         );
 
+
     }
 
+    @Test
+    public void testElementTitle()
+    {
+        waitForElementAndClick(
+                By.xpath("//*[contains(@text,'Search Wikipedia')]"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        String search_title = "World";
+
+        waitForElementAndSendKeys(
+                By.xpath("//*[contains(@text,'Search…')]"),
+                search_title,
+                "Cannot find search input",
+                5
+        );
+
+        waitForElementAndClick(
+                By.xpath("//*[@resource-id = 'org.wikipedia:id/page_list_item_container']//*[@text='" + search_title + "']"),
+                "Cannot find 'Search Wikipedia' input",
+                5
+        );
+
+        assertElementPresent(
+                By.id("org.wikipedia:id/view_page_title_text"),
+                "Cannot find element page title"
+        );
+
+    }
 
 
     private WebElement waitForElementPresent(By by, String error_message, long timeoutInSeconds)
@@ -871,6 +902,15 @@ public class FirstTest {
         WebElement element = waitForElementPresent(by, error_message, timeoutInSeconds);
         return element.getAttribute(attribute);
     }
+
+    private void assertElementPresent(By by, String error_message)
+    {
+       String element_title = driver.findElement(by).getText();
+        if(element_title == null){
+            throw new AssertionError(error_message);
+       }
+    }
+
 }
 
 
