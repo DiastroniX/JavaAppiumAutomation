@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class FirstTest {
 
@@ -767,8 +768,7 @@ public class FirstTest {
         );
 
         assertElementPresent(
-                By.id("org.wikipedia:id/view_page_title_text"),
-                "Cannot find element page title"
+                By.id("org.wikipedia:id/view_page_title_text")
         );
 
     }
@@ -905,12 +905,13 @@ public class FirstTest {
         return element.getAttribute(attribute);
     }
 
-    private void assertElementPresent(By by, String error_message)
+    private void assertElementPresent(By by)
     {
-       String element_title = driver.findElement(by).getText();
-        if(element_title == null){
-            throw new AssertionError(error_message);
-       }
+        try {
+            driver.findElement(by);
+        } catch (NoSuchElementException e){
+            throw new AssertionError("Element '" + by.toString() + "' not found");
+        }
     }
 
 }
