@@ -63,4 +63,47 @@ public class SearchTests extends CoreTestCase
         searchPageObject.assertThereIsNoResultOfSearch();
 
     }
+
+    @Test
+    public void testFindArticleTabSearch()
+    {
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
+
+        searchPageObject.initSearchInput();
+
+        String search_title = searchPageObject.getSearchTitle();
+
+        assertEquals(
+                "We see unexpected default title!",
+                "Search…",
+                search_title
+        );
+    }
+
+    @Test
+    public void testFindSomeResults()
+    {
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
+
+        searchPageObject.initSearchInput();
+        searchPageObject.typeSearchLine("Sunlight");
+        searchPageObject.waitForSearchResult("Sunlight");
+        searchPageObject.waitForSearchResult("Sunlight Foundation");
+        searchPageObject.waitForSearchResult("Sunlight (cleaning product)");
+        searchPageObject.clearSearchLineText();
+        searchPageObject.clickCancelSearch();
+        searchPageObject.waitForCancelButtonToDisappear();
+    }
+
+    @Test
+    public void testFindSomeResultsWithSameWord()
+    {
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
+
+        searchPageObject.initSearchInput();
+        searchPageObject.typeSearchLine("Test");
+        searchPageObject.waitSomeSearchResult(0, "Test");
+        searchPageObject.waitSomeSearchResult(1, "Test");
+        searchPageObject.waitSomeSearchResult(2, "Test");
+    }
 }

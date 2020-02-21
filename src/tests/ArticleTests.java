@@ -40,4 +40,18 @@ public class ArticleTests extends CoreTestCase
         articlePageObject.waitForTitleElement();
         articlePageObject.swipeToFooter();
     }
+
+    @Test
+    public void testElementTitle()
+    {
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
+
+        searchPageObject.initSearchInput();
+        searchPageObject.typeSearchLine("World");
+        searchPageObject.clickByArticleWithSubstring("Planet Earth and all life upon it, including human civilization");
+
+        ArticlePageObject articlePageObject = new ArticlePageObject(driver);
+        articlePageObject.checkElementTitle();
+    }
 }
+

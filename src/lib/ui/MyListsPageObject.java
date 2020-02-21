@@ -9,6 +9,7 @@ public class MyListsPageObject extends MainPageObject {
             FOLDER_BY_NAME_TPL = "//*[@text='{FOLDER_NAME}']",
             ARTICLE_BY_TITLE_TPL = "//*[@text='{TITLE}']";
 
+
     public static String getFolderXpathByName(String name_of_folder)
     {
         return FOLDER_BY_NAME_TPL.replace("{FOLDER_NAME}", name_of_folder);
@@ -27,6 +28,17 @@ public class MyListsPageObject extends MainPageObject {
     }
 
     public void openFolderByName(String name_of_folder)
+    {
+        String folder_name_xpath = getFolderXpathByName(name_of_folder);
+
+        this.waitForElementAndClick(
+                By.xpath(folder_name_xpath),
+                "Cannot find created folder " + name_of_folder,
+                5
+        );
+    }
+
+    public void openFolderInArticleByName(String name_of_folder)
     {
         String folder_name_xpath = getFolderXpathByName(name_of_folder);
 
@@ -60,5 +72,16 @@ public class MyListsPageObject extends MainPageObject {
                 "Cannot find saved article"
         );
         this.waitForArticleToDissappearByTitle(article_title);
+    }
+
+    public void openSavedArticleInMyLists(String article_title)
+    {
+        String article_xpath = getFolderXpathByName(article_title);
+
+        this.waitForElementAndClick(
+                By.xpath(article_xpath),
+                "Cannot open saved article: " + article_title,
+                5
+        );
     }
 }

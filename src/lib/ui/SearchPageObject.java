@@ -2,6 +2,7 @@ package lib.ui;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class SearchPageObject extends MainPageObject {
 
@@ -10,8 +11,10 @@ public class SearchPageObject extends MainPageObject {
             SEARCH_INPUT = "//*[contains(@text,'Search…')]",
             SEARCH_CANCEL_BUTTON = "org.wikipedia:id/search_close_btn",
             SEARCH_RESULT_BY_SUBSTRING_TPL = "//*[@resource-id = 'org.wikipedia:id/page_list_item_container']//*[@text='{SUBSTRING}']",
+            SEARCH_RESULT_BY_INDEX_CONTAINS_SUBSTRING_TPL = "//*[@index = '{NUMBER}']//*[contains(@text,'{SUBSTRING}')]",
             SEARCH_RESULT_ELEMENT = "//*[@resource-id = 'org.wikipedia:id/search_results_list']/*[@resource-id = 'org.wikipedia:id/page_list_item_container']",
-            SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text = 'No results found']";
+            SEARCH_EMPTY_RESULT_ELEMENT = "//*[@text = 'No results found']",
+            SEARCH_TITLE = "org.wikipedia:id/search_src_text";
 
     public SearchPageObject(AppiumDriver driver)
     {
@@ -19,9 +22,14 @@ public class SearchPageObject extends MainPageObject {
     }
 
     /* TEMPLATES METHODS */
-    private static String getResultSearchElement(String substring)
+    private static String getResultSearchElementByText(String substring)
     {
         return SEARCH_RESULT_BY_SUBSTRING_TPL.replace("{SUBSTRING}", substring);
+    }
+
+    private static String getResultSearchElementByID(int index, String substring)
+    {
+        return SEARCH_RESULT_BY_INDEX_CONTAINS_SUBSTRING_TPL.replace("{NUMBER}", String.valueOf(index)).replace("{SUBSTRING}", substring);
     }
     /* TEMPLATES METHODS */
 
@@ -38,7 +46,7 @@ public class SearchPageObject extends MainPageObject {
 
     public void waitForSearchResult(String substring)
     {
-        String search_result_xpath = getResultSearchElement(substring);
+        String search_result_xpath = getResultSearchElementByText(substring);
         this.waitForElementPresent(By.xpath(search_result_xpath), "Cannot find search result with substring " + substring);
     }
 
@@ -59,7 +67,7 @@ public class SearchPageObject extends MainPageObject {
 
     public void clickByArticleWithSubstring(String substring)
     {
-        String search_result_xpath = getResultSearchElement(substring);
+        String search_result_xpath = getResultSearchElementByText(substring);
         this.waitForElementAndClick(By.xpath(search_result_xpath), "Cannot find and click search result with substring " + substring, 10);
     }
 
@@ -81,6 +89,28 @@ public class SearchPageObject extends MainPageObject {
     public void assertThereIsNoResultOfSearch()
     {
         this.assertElementNotPresent(By.xpath(SEARCH_RESULT_ELEMENT), "We supposed not to find any results");
+    }
+
+    public WebElement waitForSearchTitleElement()
+    {
+        return this.waitForElementPresent(By.id(SEARCH_TITLE), "Cannot find search title on page!", 15);
+    }
+
+    public String getSearchTitle()
+    {
+        WebElement title_element = waitForSearchTitleElement();
+        return title_element.getAttribute("text");
+    }
+
+    public void clearSearchLineText()
+    {
+        this.waitForElementAndClear(By.id(SEARCH_TITLE), "Cannot find search field", 5);
+    }
+
+    public void waitSomeSearchResult(int index, String substring)
+    {
+        String search_result_xpath = getResultSearchElementByID(index, substring);
+        this.waitForElementPresent(By.xpath(search_result_xpath), "Cannot find search result with substring " + substring);
     }
 }
 
