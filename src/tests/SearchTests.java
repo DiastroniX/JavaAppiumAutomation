@@ -106,4 +106,25 @@ public class SearchTests extends CoreTestCase
         searchPageObject.waitSomeSearchResult(1, "Test");
         searchPageObject.waitSomeSearchResult(2, "Test");
     }
+
+    @Test
+    public void testFindResultByTitleAndDescription()
+    {
+        SearchPageObject searchPageObject = new SearchPageObject(driver);
+
+        String search_line = "Russia";
+        String title_1 = "Russia";
+        String substring_1 = "Transcontinental country in Eastern Europe and Northern Asia";
+        String title_2 = "Russian language";
+        String substring_2 = "East Slavic language";
+        String title_3 = "Russian interference in the 2016 United States elections";
+        String substring_3 = "Foreign meddling campaign";
+
+
+        searchPageObject.initSearchInput();
+        searchPageObject.typeSearchLine(search_line);
+        searchPageObject.waitForElementByTitleAndDescription(title_1, substring_1);
+        searchPageObject.waitForElementByTitleAndDescription(title_2, substring_2);
+        searchPageObject.waitForElementByTitleAndDescription(title_3, substring_3);
+    }
 }
