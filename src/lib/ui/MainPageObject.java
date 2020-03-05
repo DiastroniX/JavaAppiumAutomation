@@ -36,7 +36,7 @@ public class MainPageObject {
 
     public WebElement waitForElementPresent(String locator, String error_message)
     {
-        return waitForElementPresent(locator, error_message, 1);
+        return waitForElementPresent(locator, error_message, 5);
     }
 
     public WebElement waitForElementAndClick(String locator, String error_message, long timeoutInSeconds)
