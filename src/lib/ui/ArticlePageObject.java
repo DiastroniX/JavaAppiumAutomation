@@ -16,7 +16,8 @@ abstract public class ArticlePageObject extends MainPageObject {
             MY_LIST_OK_BUTTON,
             MY_LIST_SAVED_TITLE_TPL,
             CLOSE_ARTICLE_BUTTON,
-            SEARCH_ARTICLE_BUTTON;
+            SEARCH_ARTICLE_BUTTON,
+            CLOSE_SAVE_OVERLAY;
 
     /* TEMPLATES METHODS */
     public static String getFolderXpathByListName(String name_of_folder) {
@@ -123,11 +124,17 @@ abstract public class ArticlePageObject extends MainPageObject {
 
     }
 
+    /*IOS Method*/
+    public void addArticlesToMySaved(){
+        this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 5);
+        this.waitForElementAndClick(CLOSE_SAVE_OVERLAY, "Cannot find save overlay in article page", 5);
+    }
+
     public void closeArticle() {
         this.waitForElementAndClick(
                 CLOSE_ARTICLE_BUTTON,
                 "Cannot close article, cannot find X link",
-                5
+                10
         );
     }
 
