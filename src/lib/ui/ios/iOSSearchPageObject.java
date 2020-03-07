@@ -1,8 +1,9 @@
-package lib.ui;
+package lib.ui.ios;
 
 import io.appium.java_client.AppiumDriver;
+import lib.ui.SearchPageObject;
 
-public class IOSSearchPageObject extends SearchPageObject
+public class iOSSearchPageObject extends SearchPageObject
 {
     static {
         SEARCH_INIT_ELEMENT = "xpath://XCUIElementTypeSearchField[@name='Search Wikipedia']";
@@ -16,7 +17,7 @@ public class IOSSearchPageObject extends SearchPageObject
         SEARCH_TITLE = "id:org.wikipedia:id/search_src_text";
     }
 
-    public IOSSearchPageObject(AppiumDriver driver)
+    public iOSSearchPageObject(AppiumDriver driver)
     {
         super(driver);
     }

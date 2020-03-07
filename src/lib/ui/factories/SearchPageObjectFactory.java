@@ -2,7 +2,7 @@ package lib.ui.factories;
 
 import io.appium.java_client.AppiumDriver;
 import lib.Platform;
-import lib.ui.IOSSearchPageObject;
+import lib.ui.ios.iOSSearchPageObject;
 import lib.ui.SearchPageObject;
 import lib.ui.android.AndroidSearchPageObject;
 
@@ -13,7 +13,7 @@ public class SearchPageObjectFactory
         if(Platform.getInstance().isAndroid()) {
             return new AndroidSearchPageObject(driver);
         } else {
-            return new IOSSearchPageObject(driver);
+            return new iOSSearchPageObject(driver);
         }
     }
 }
