@@ -11,7 +11,7 @@ public class iOSArticlePageObject extends ArticlePageObject {
         OPTIONS_ADD_TO_MY_LIST_BUTTON = "id:Save for later";
         MY_LIST_SAVED_TITLE_TPL = "xpath://*[@resource-id = 'org.wikipedia:id/item_container']//*[@text='{FOLDER_NAME}']";
         CLOSE_ARTICLE_BUTTON = "id:Back";
-        SEARCH_ARTICLE_BUTTON = "id:org.wikipedia:id/menu_page_search";
+        SEARCH_ARTICLE_BUTTON = "id:Search Wikipedia";
         CLOSE_SAVE_OVERLAY = "id:places auth close";
     }
 

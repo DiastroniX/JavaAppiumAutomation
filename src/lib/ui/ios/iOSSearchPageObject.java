@@ -15,6 +15,7 @@ public class iOSSearchPageObject extends SearchPageObject
         SEARCH_RESULT_ELEMENT = "xpath://XCUIElementTypeLink";
         SEARCH_EMPTY_RESULT_ELEMENT = "xpath://XCUIElementTypeStaticText[@name='No results found']";
         SEARCH_TITLE = "id:org.wikipedia:id/search_src_text";
+        SEARCH_CLEAN_BUTTON = "id:clear mini";
     }
 
     public iOSSearchPageObject(AppiumDriver driver)

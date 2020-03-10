@@ -3,6 +3,7 @@ package lib.ui;
 import io.appium.java_client.AppiumDriver;
 import lib.Platform;
 
+
 abstract public class MyListsPageObject extends MainPageObject {
 
     protected static String

@@ -127,7 +127,11 @@ abstract public class ArticlePageObject extends MainPageObject {
     /*IOS Method*/
     public void addArticlesToMySaved(){
         this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to reading list", 5);
-        this.waitForElementAndClick(CLOSE_SAVE_OVERLAY, "Cannot find save overlay in article page", 5);
+    }
+
+    /*IOS Method*/
+    public void closeSaveOverlay(){
+    this.waitForElementAndClick(CLOSE_SAVE_OVERLAY, "Cannot find save overlay in article page", 5);
     }
 
     public void closeArticle() {
