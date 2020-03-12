@@ -124,8 +124,16 @@ public class SearchTests extends CoreTestCase
 
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine(search_line);
-        searchPageObject.waitForElementByTitleAndDescription(title_1, substring_1);
-        searchPageObject.waitForElementByTitleAndDescription(title_2, substring_2);
-        searchPageObject.waitForElementByTitleAndDescription(title_3, substring_3);
+
+        if (Platform.getInstance().isAndroid()) {
+            searchPageObject.waitForElementByTitleAndDescription(title_1, substring_1);
+            searchPageObject.waitForElementByTitleAndDescription(title_2, substring_2);
+            searchPageObject.waitForElementByTitleAndDescription(title_3, substring_3);
+        } else {
+            searchPageObject.checkAttributeNameByTitleAndDescription(title_1, substring_1);
+            searchPageObject.checkAttributeNameByTitleAndDescription(title_2, substring_2);
+            searchPageObject.checkAttributeNameByTitleAndDescription(title_3, substring_3);
+        }
+
     }
 }

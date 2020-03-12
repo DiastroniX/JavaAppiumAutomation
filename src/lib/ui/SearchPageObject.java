@@ -3,6 +3,7 @@ package lib.ui;
 import io.appium.java_client.AppiumDriver;
 import lib.Platform;
 import org.openqa.selenium.WebElement;
+import org.junit.Assert;
 
 abstract public class SearchPageObject extends MainPageObject {
 
@@ -121,6 +122,18 @@ abstract public class SearchPageObject extends MainPageObject {
         WebElement name_of_saved_element = this.waitForElementPresent(name_xpath, "Cannot find article with xpath");
 
         return name_of_saved_element.getAttribute("name");
+    }
+
+    /*IOS method*/
+    public void checkAttributeNameByTitleAndDescription(String title, String description)
+    {
+        String name_xpath = getResultSearchElementByText(title);
+        WebElement element = this.waitForElementPresent(name_xpath,"Cannot find article with xpath");
+
+        String name_of_search_result = element.getAttribute("name");
+        Assert.assertTrue(
+                "Cannot find search result with title " + title + "and description " + description,
+                name_of_search_result.contains(title)&&name_of_search_result.contains(description));
     }
 }
 
